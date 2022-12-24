@@ -5,6 +5,7 @@
 #include "common.h"
 #include "sqlviewer/sqlviewerwindow.h"
 #include "serial/serialwindow.h".h"
+#include "sqlviewer/sqlviewermain.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +13,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     SQLViewerWindow s;
     SerialWindow s2;
-
+    SQLViewerMain m;
 
     //w.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
     //w.show();
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
 //    s2.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 //    s2.show();
 
-    s.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
+    s.resize(1520, 950);
     s.show();
 
     return a.exec();

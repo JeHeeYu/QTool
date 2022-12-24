@@ -35,10 +35,10 @@ private:
     void ConnectInit();
 
 signals:
-    void SignalSelectDatabase(QString);
+    void SignalSelectDatabase(QString dbPath);
 
 private:
-    Ui::SQLViewerWindow *ui;
+    Ui::SQLViewerWindow *ui;    
 
     QToolBar *toolBar;
     QAction *newAction;
