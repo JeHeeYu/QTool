@@ -9,6 +9,7 @@ SQLViewerMain::SQLViewerMain(QObject *parent) : QObject(parent)
 
 void SQLViewerMain::ConnectInit()
 {
+    // DB Open
     connect(SQLVIEWERWINDOW(), SIGNAL(SignalSelectDatabase(QString)), this, SLOT(SelectDatabase(QString)));
 }
 
