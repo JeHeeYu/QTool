@@ -8,13 +8,20 @@
 
 #include "sqlviewerwindow.h"
 
-class SQLViewerMain
+#define SQLVIEWERMAIN()         SQLViewerMain::Instance()
+
+class SQLViewerMain : public QObject, public Singleton<SQLViewerMain>
 {
+    Q_OBJECT
+
 public:
-    SQLViewerMain();
+    explicit SQLViewerMain(QObject *parent = nullptr);
+
+private:
+    void ConnectInit();
 
 private slots:
-    void SelectDatabase(QString);
+    void SelectDatabase(QString dbPath);
 
 
 private:
