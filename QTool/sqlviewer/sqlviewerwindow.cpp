@@ -44,4 +44,8 @@ void SQLViewerWindow::ConnectInit()
 void SQLViewerWindow::OpenDB()
 {
     openFilePath = OpenFileDialog(this, openFilePath);
+
+    qDebug() << "Jehee OpenDB" << openFilePath;
+
+    emit SignalSelectDatabase(openFilePath);
 }
