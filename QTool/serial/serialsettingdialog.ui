@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SerialSettingDialog</class>
+ <widget class="QDialog" name="SerialSettingDialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>522</width>
+    <height>384</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>340</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="settingLabel">
+   <property name="geometry">
+    <rect>
+     <x>212</x>
+     <y>23</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Setting</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="portNumberLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>78</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Port Number</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="baudrateLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>128</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Baudrate</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dataBitsLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>178</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Data Bits</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="portNumberComboBox">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>73</y>
+     <width>171</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="baudrateComboBox">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>123</y>
+     <width>171</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stopBitsLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>228</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Stop Bits</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="dataBitsComboBox">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>173</y>
+     <width>171</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="parityBitsLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>278</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Parity Bits</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="stopBitsComboBox">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>223</y>
+     <width>171</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="parityBitsComboBox">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>273</y>
+     <width>171</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>79</x>
+     <y>313</y>
+     <width>331</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>402</x>
+     <y>40</y>
+     <width>16</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_4">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>40</y>
+     <width>20</width>
+     <height>281</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>82</x>
+     <y>34</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_5">
+   <property name="geometry">
+    <rect>
+     <x>297</x>
+     <y>34</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>2</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <zorder>buttonBox</zorder>
+  <zorder>portNumberLabel</zorder>
+  <zorder>baudrateLabel</zorder>
+  <zorder>dataBitsLabel</zorder>
+  <zorder>portNumberComboBox</zorder>
+  <zorder>baudrateComboBox</zorder>
+  <zorder>stopBitsLabel</zorder>
+  <zorder>dataBitsComboBox</zorder>
+  <zorder>parityBitsLabel</zorder>
+  <zorder>stopBitsComboBox</zorder>
+  <zorder>parityBitsComboBox</zorder>
+  <zorder>line</zorder>
+  <zorder>line_3</zorder>
+  <zorder>line_4</zorder>
+  <zorder>settingLabel</zorder>
+  <zorder>line_2</zorder>
+  <zorder>line_5</zorder>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>SerialSettingDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>SerialSettingDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
