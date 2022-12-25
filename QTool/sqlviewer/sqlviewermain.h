@@ -16,9 +16,9 @@ class SQLViewerMain : public QObject, public Singleton<SQLViewerMain>
 
 public:
     explicit SQLViewerMain(QObject *parent = nullptr);
+    int GetQueryRowSize(QSqlQuery query);
 
 private:
-    void ConnectInit();
 
 private slots:
     void SelectDatabase(QString dbPath);
@@ -26,6 +26,8 @@ private slots:
 
 private:
     QSqlDatabase db;
+    int databaseRowCount;
+
 };
 
 #endif // SQLVIEWERMAIN_H

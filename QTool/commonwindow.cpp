@@ -26,3 +26,14 @@ QString CommonWindow::OpenFileDialog(QWidget *widget, QString filePath)
 
     return path;
 }
+
+void CommonWindow::AddTreeWidgetHeader(QTreeWidget *treeWidget, QTreeWidgetItem *treeItem, int index, QString text, bool end)
+{
+    treeItem->setText(index, text);
+
+    if(end == true) {
+        //treeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+        treeWidget->setHeaderItem(treeItem);
+    }
+
+}
