@@ -17,19 +17,34 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>40</x>
       <y>40</y>
-      <width>1291</width>
-      <height>851</height>
+      <width>1441</width>
+      <height>861</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>Tab 1</string>
      </attribute>
+     <widget class="QTreeWidget" name="structureTree">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>80</y>
+        <width>1411</width>
+        <height>741</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string notr="true">1</string>
+       </property>
+      </column>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">

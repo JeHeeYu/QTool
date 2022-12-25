@@ -22,4 +22,14 @@
 #define EXIT_TEXT               "Exit"
 #define DATABASE_OPEN_TEXT      "Database Open"
 
+// SQL Data Structure Text
+#define SQL_NAME_TEXT           "Name"
+#define SQL_TYPE_TEXT           "Type"
+#define SQL_SCHENA_TEXT         "Schema"
+
+// SQL Data Sttucture Index
+#define SQL_NAME_INDEX          0
+#define SQL_TYPE_INDEX          1
+#define SQL_SCHEMA_INDEX         2
+
 #endif // COMMON_H
