@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    SQLViewerWindow s;
-    SerialWindow s2;
+    //SQLViewerWindow s;
+    SerialWindow s;
     SQLViewerMain m;
 
     //w.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 //    s2.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 //    s2.show();
 
-    s.resize(1520, 950);
+    s.resize(520, 340);
     s.show();
 
     return a.exec();

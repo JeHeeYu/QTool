@@ -16,7 +16,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="okayButton">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -247,7 +247,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <zorder>buttonBox</zorder>
+  <zorder>okayButton</zorder>
   <zorder>portNumberLabel</zorder>
   <zorder>baudrateLabel</zorder>
   <zorder>dataBitsLabel</zorder>
@@ -268,7 +268,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>okayButton</sender>
    <signal>accepted()</signal>
    <receiver>SerialSettingDialog</receiver>
    <slot>accept()</slot>
@@ -284,7 +284,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>okayButton</sender>
    <signal>rejected()</signal>
    <receiver>SerialSettingDialog</receiver>
    <slot>reject()</slot>

@@ -16,6 +16,29 @@
 #define SERIAL_STOPBITS_LABEL   "Stop Bits"
 #define SERIAL_PARITYBITS_LABEL "Parity Bits"
 
+// Serial Dialog Baudrate Value
+#define BAUDRATE_1200           "1200"
+#define BAUDRATE_2400           "2400"
+#define BAUDRATE_4800           "4800"
+#define BAUDRATE_9600           "9600"
+#define BAUDRATE_19200          "19200"
+#define BAUDRATE_28800          "28800"
+#define BAUDRATE_38400          "38400"
+#define BAUDRATE_57600          "57600"
+#define BAUDRATE_115200         "115200"
+
+// Serial Dialog Data Bits Value
+#define DATA_BITS_8BITS          "8"
+#define DATA_BITS_9BITS          "9"
+
+// Serial Dialog Stop Bits Value
+#define STOP_BITS_1BITS         "1"
+#define STOP_BITS_0BITS         "0"
+
+#define PARITIY_BITS_NONE       "None"
+#define PARITIY_BITS_ODD        "Odd"
+#define PARITIY_BITS_EVEN       "Even"
+
 // ToolBar Text
 #define NEW_TEXT                "New"
 #define SETTING_TEXT            "Setting"

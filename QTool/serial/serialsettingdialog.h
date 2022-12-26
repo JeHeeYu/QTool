@@ -4,7 +4,10 @@
 #include <QDialog>
 
 #include "common.h"
-#include "serialinterface.h"
+#include "serialmain.h"
+
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
 
 namespace Ui {
 class SerialSettingDialog;
@@ -19,9 +22,12 @@ public:
     ~SerialSettingDialog();
 
 private:
+    void ConnectInit();
     void Init();
-    void InitLabel();
+    void LabelInit();
     void ComboBoxInit();
+    void GetSerialPort();
+
 
 private:
     Ui::SerialSettingDialog *ui;
