@@ -9,6 +9,8 @@
 #include <QString>
 #include <QDebug>
 
+#include <QPixmap>
+
 #include "singleton.h"
 #include "common.h"
 #include "commonwindow.h"

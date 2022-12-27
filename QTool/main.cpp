@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-
 #include "common.h"
 #include "sqlviewer/sqlviewerwindow.h"
 #include "serial/serialwindow.h".h"
@@ -21,7 +20,8 @@ int main(int argc, char *argv[])
 //    s2.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
 //    s2.show();
 
-    s.resize(520, 340);
+    s.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
+
     s.show();
 
     return a.exec();

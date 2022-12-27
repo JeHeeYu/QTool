@@ -28,6 +28,10 @@ private:
     void ComboBoxInit();
     void GetSerialPort();
 
+private slots:
+    void OKButtonClick();
+    void CancelButtonClick();
+
 
 private:
     Ui::SerialSettingDialog *ui;

@@ -8,6 +8,10 @@ SerialWindow::SerialWindow(QWidget *parent) :
     ui->setupUi(this);
 
     Init();
+
+    QPixmap pix("../images/red_indicator_2.png");
+    ui->label->setPixmap(pix);
+
 }
 
 SerialWindow::~SerialWindow()
@@ -37,7 +41,6 @@ void SerialWindow::ToolBarInit()
     newAction = AddToolBar(toolBar, newAction, "New", "../images/new_icon.png");
     settingAction = AddToolBar(toolBar, settingAction, "Setting", "../images/setting_icon.png");
     exitAction = AddToolBar(toolBar, exitAction, "Exit", "../images/exit_icon.png");
-
 }
 
 void SerialWindow::OpenSerialInfoSetting()

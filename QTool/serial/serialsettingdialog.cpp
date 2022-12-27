@@ -19,11 +19,14 @@ void SerialSettingDialog::Init()
 {
     LabelInit();
     ComboBoxInit();
+    ConnectInit();
 }
 
 void SerialSettingDialog::ConnectInit()
 {
-
+    // OK Button Click
+    connect(ui->okButton, SIGNAL(clicked()), this, SLOT(OKButtonClick()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(CancelButtonClick()));
 }
 
 void SerialSettingDialog::LabelInit()
@@ -74,4 +77,16 @@ void SerialSettingDialog::GetSerialPort()
     for(const QSerialPortInfo &info : infos) {
         ui->portNumberComboBox->addItem(info.portName());
     }
+}
+
+void SerialSettingDialog::OKButtonClick()
+{
+    qDebug() << "Jehee Test : " << ui->baudrateComboBox->currentIndex();
+
+    this->close();
+}
+
+void SerialSettingDialog::CancelButtonClick()
+{
+    this->close();
 }

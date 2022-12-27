@@ -2,8 +2,8 @@
 #define COMMON_H
 
 //Window Size
-#define WINDOW_SIZE_X           1060
-#define WINDOW_SIZE_Y           680
+#define WINDOW_SIZE_X           1520
+#define WINDOW_SIZE_Y           1080
 
 // ToolBar Size
 #define TOOL_BAR_ICON_SIZE_X    40
