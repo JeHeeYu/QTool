@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include <QPixmap>
+#include <QPainter>
 
 #include "singleton.h"
 #include "common.h"
@@ -27,6 +28,8 @@ class SerialWindow : public QMainWindow, public CommonWindow
 public:
     explicit SerialWindow(QWidget *parent = nullptr);
     ~SerialWindow();
+
+    virtual void paintEvent(QPaintEvent *event);
 
 
 private:
