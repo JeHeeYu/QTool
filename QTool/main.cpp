@@ -1,28 +1,20 @@
-#include "mainwindow.h"
-#include <QApplication>
-
-#include "common.h"
-#include "sqlviewer/sqlviewerwindow.h"
-#include "serial/serialwindow.h".h"
-#include "sqlviewer/sqlviewermain.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    //SQLViewerWindow s;
-    SerialWindow s;
-    SQLViewerMain m;
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    //w.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
-    //w.show();
+    QGuiApplication app(argc, argv);
 
-//    s2.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
-//    s2.show();
+    QQmlApplicationEngine engine;
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+    }, Qt::QueuedConnection);
+    engine.load(url);
 
-    s.resize(WINDOW_SIZE_X, WINDOW_SIZE_Y);
-
-    s.show();
-
-    return a.exec();
+    return app.exec();
 }
