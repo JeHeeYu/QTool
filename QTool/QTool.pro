@@ -1,4 +1,4 @@
-QT += quick
+QT += quick serialport
 CONFIG += c++11 qml_debug
 
 # The following define makes your compiler emit warnings if you use
@@ -32,3 +32,7 @@ DISTFILES += \
     images/exit_icon.png \
     images/new_icon.png \
     images/setting_icon.png
+
+HEADERS +=
+
+include(interface/Serial/Serial.pri)
