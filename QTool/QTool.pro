@@ -35,4 +35,4 @@ DISTFILES += \
 
 HEADERS +=
 
-include(interface/Serial/Serial.pri)
+include(Interface/Serial/Serial.pri)

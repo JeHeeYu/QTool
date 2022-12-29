@@ -17,6 +17,8 @@ public:
     explicit SerialMain(QObject *parent = nullptr);
     ~SerialMain();
 
+    Q_INVOKABLE void jeheetest(int i);
+
 public slots:
 
 public:

@@ -17,19 +17,21 @@ void SerialMain::ReadSerialPort()
     qDebug() << "SerialPortInfo : " << QSerialPortInfo::availablePorts().count();
 
     for(const QSerialPortInfo &info : infos) {
-        qDebug() << "port : " << info.portName();
         SetSerialPortInfo(info.portName());
     }
 }
 
 void SerialMain::SetSerialPortInfo(QVariant info)
 {
-    qDebug() << "Jehee Set : " << info;
     serialPortInfo << info;
 }
 
 const QVariantList SerialMain::GetSerialPortInfo()
 {
-    qDebug() << "Jehee get : " << serialPortInfo;
     return serialPortInfo;
+}
+
+void SerialMain::jeheetest(int i)
+{
+    qDebug() << "Jehee test : " << i;
 }

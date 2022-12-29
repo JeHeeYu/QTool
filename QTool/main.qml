@@ -8,34 +8,37 @@ import "./Serial"
 
 ApplicationWindow {
     id:root
-    visible: false
+    visible: true
     width: 1280
     height: 840
     title: qsTr("Hello World")
 
-    property var jehee: serialPortInfo
+    //property var jehee: serialPortInfo
 
     Component.onCompleted: {
-        console.log("jehee");
+        console.log("jehee : ", serialMain.serialPortInfo);
+        //console.log("zz")
     }
 
     //menuBar: MainMenuBar { id: mainMenu }
     //header: MainToolBar { id: mainTool }
 
-    SerialMain {
-        id: serialMain
-        visible: false
+    SerialMainWindow {
+        id: serialMainWindow
+        visible: true
     }
 
-//    Button {
-//        width: 100
-//        height: 100
-//        onClicked: {
-//            serialMain.visible = true
-//        }
-//    }
+    Button {
+        width: 100
+        height: 100
+        onClicked: {
+            //serialMain.visible = true
+            serialMain.jeheetest(1)
+            console.log("jehee : ", serialMain.serialPortInfo);
+        }
+    }
 
-//    CustomDialog {
+    CustomDialog {
 
-//    }
+    }
 }

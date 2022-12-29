@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Extras 1.4
 
 Item {
-    property var portNumberArray: []
+    property var portNumberArray: serialMain.serialPortInfo
     property var baudrateArray: [1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200]
     property var dataBitsArray: [5, 6, 7, 8, 9]
     property var stopBitsArray: [0, 1]
@@ -36,6 +36,8 @@ Item {
         onButtonClicked: {
             if (clickedButton === StandardButton.Ok) {
                 console.log("Accepted " + baudrateComboBoxId.currentIndex)
+
+                connetButtonClick(baudrateComboBoxId.currentIndex, dataBitsComboBoxId.currentIndex, stopBitsComboBoxId.currentIndex, parityBitsComboBoxId.currentIndex)
             }
             else {
                 console.log("Rejected" + clickedButton)
@@ -123,6 +125,10 @@ Item {
                 }
             }
         }
+    }
+
+    function connetButtonClick(info1, info2, info3, info4)
+    {
     }
 }
 

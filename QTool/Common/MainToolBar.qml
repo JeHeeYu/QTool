@@ -80,7 +80,7 @@ ToolBar {
             }
 
             onClicked: {
-                dialog.visible = true
+                //dialog.visible = true
             }
         }
 

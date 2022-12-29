@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include "Interface/Serial/serialmain.h"
 
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     SerialMain s;
+    engine.rootContext()->setContextProperty("serialMain", &s);
 
     return app.exec();
 }
