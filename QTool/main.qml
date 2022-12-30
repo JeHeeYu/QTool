@@ -20,8 +20,8 @@ ApplicationWindow {
         //console.log("zz")
     }
 
-    //menuBar: MainMenuBar { id: mainMenu }
-    //header: MainToolBar { id: mainTool }
+    menuBar: MainMenuBar { id: mainMenu }
+    header: MainToolBar { id: mainTool }
 
     SerialMainWindow {
         id: serialMainWindow
@@ -38,7 +38,4 @@ ApplicationWindow {
         }
     }
 
-    CustomDialog {
-
-    }
 }

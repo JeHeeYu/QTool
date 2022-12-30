@@ -25,6 +25,11 @@ ToolBar {
     property string exitIconSource: "file:///home/workstation/QTool_Save/images/exit_icon.png"
     property string exitIconText: "Exit"
 
+    // ToolBar Button Click Event
+    signal newButtonClickSignal()
+    signal settingButtonClickSignal()
+    signal exitButtonClickSignal()
+
     Row {
         // New ToolBar Button
         ToolButton {
@@ -51,7 +56,7 @@ ToolBar {
             }
 
             onClicked: {
-
+                newButtonClickSignal()
             }
         }
 
@@ -80,7 +85,7 @@ ToolBar {
             }
 
             onClicked: {
-                //dialog.visible = true
+                settingButtonClickSignal()
             }
         }
 
@@ -109,7 +114,7 @@ ToolBar {
             }
 
             onClicked: {
-
+                exitButtonClickSignal()
             }
         }
     }

@@ -16,7 +16,19 @@ ApplicationWindow {
     menuBar: MainMenuBar {
         id: mainMenu
     }
-    header: MainToolBar { id: mainTool }
+    header: MainToolBar {
+        id: mainTool
+
+        onSettingButtonClickSignal: {
+            customDialog.dialogOpen()
+        }
+    }
+
+    CustomDialog {
+        id: customDialog
+        dialogOpenStatus: false
+    }
+
     Indicator {
         id: statusIndicator
         visible: true

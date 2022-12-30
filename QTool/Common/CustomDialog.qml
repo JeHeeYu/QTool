@@ -6,19 +6,24 @@ import QtQuick.Layouts 1.12
 import QtQuick.Extras 1.4
 
 Item {
-    property var portNumberArray: serialMain.serialPortInfo
-    property var baudrateArray: [1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200]
-    property var dataBitsArray: [5, 6, 7, 8, 9]
-    property var stopBitsArray: [0, 1]
-    property var parityBitsArray: ["None", "Odd", "Even"]
 
-    property var tempArray: []
+    property bool dialogOpenStatus: false
+
+    property var portNumberArray: serialMain.serialPortInfo
+    property var baudrateArray: [9600, 1200, 2400, 4800, 19200, 38400, 57600, 115200]
+    property var dataBitsArray: [8, 5, 6, 7]
+    property var stopBitsArray: [1, 2, 3]
+    property var parityBitsArray: ["NoParity", "EvenParity", "OddParity", "SpaceParity", "MarkParity"]
+    property var flowControlBitsArray: ["NoFlowControl", "HardwareControl", "SoftwareControl"]
+
+    property var serialPortInfo: []
 
     property string portNumberText: "Port Number"
     property string baudrateText: "Baudrate"
     property string dataBitsText: "Data Bits"
     property string stopBitsText: "Stop Bits"
     property string parityBitsText: "Parity Bits"
+    property string flowControlBitsText: "Parity Bits"
 
     property int textLeftMargin: 10
     property int colSpacing: 10
@@ -27,20 +32,25 @@ Item {
 
     Dialog {
         id: settingDialog
-        visible: true
-        width: 320
-        height: 330
+        visible: dialogOpenStatus
+        width: 370
+        height: 370
 
         standardButtons: StandardButton.Ok | StandardButton.Cancel
 
         onButtonClicked: {
             if (clickedButton === StandardButton.Ok) {
-                console.log("Accepted " + baudrateComboBoxId.currentIndex)
+                serialPortInfo[0] = portNumberComboBoxId.currentText
+                serialPortInfo[1] = baudrateComboBoxId.currentIndex
+                serialPortInfo[2] = dataBitsComboBoxId.currentIndex
+                serialPortInfo[3] = stopBitsComboBoxId.currentIndex
+                serialPortInfo[4] = parityBitsComboBoxId.currentIndex
+                serialPortInfo[5] = flowControlBitsComboBoxId.currentIndex
 
-                connetButtonClick(baudrateComboBoxId.currentIndex, dataBitsComboBoxId.currentIndex, stopBitsComboBoxId.currentIndex, parityBitsComboBoxId.currentIndex)
+                serialMain.ConnectionSerial(serialPortInfo)
             }
             else {
-                console.log("Rejected" + clickedButton)
+                Qt.quit()
             }
         }
 
@@ -124,11 +134,27 @@ Item {
                     model: parityBitsArray
                 }
             }
+
+            // Flow Control Bits Row Layout
+            RowLayout {
+                spacing: rowSpacing + 20
+                Text {
+                    text: flowControlBitsText
+                    Layout.leftMargin: textLeftMargin
+                }
+
+                ComboBox {
+                    id: flowControlBitsComboBoxId
+                    width: comboBoxWidth
+                    model: flowControlBitsArray
+                }
+            }
         }
     }
 
-    function connetButtonClick(info1, info2, info3, info4)
+    function dialogOpen()
     {
+        settingDialog.open()
     }
 }
 
