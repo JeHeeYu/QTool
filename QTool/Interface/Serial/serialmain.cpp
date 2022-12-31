@@ -50,8 +50,10 @@ void SerialMain::jeheetest(int i)
 void SerialMain::ReadData()
 {
     const QByteArray data = serialPort->readAll();
+    QString zz(data);
 
-    qDebug() << "Jehee Data : " << data;
+    qDebug() << "Jehee Data : " << zz;
+    qDebug() << "Jehee Data123 : " << data;
 }
 
 void SerialMain::ConnectionSerial(QVariantList info)

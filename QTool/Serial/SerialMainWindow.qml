@@ -9,6 +9,7 @@ ApplicationWindow {
     visible: true
     width: 1280
     height: 840
+    color: "#EFEFEF"
     title: qsTr("Serial Main Window")
 
     property int indicatorX: 1280 - 115
@@ -34,5 +35,10 @@ ApplicationWindow {
         visible: true
         x: indicatorX
     }
+
+    SerialView {
+
+    }
+
 
 }

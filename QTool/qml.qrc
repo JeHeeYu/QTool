@@ -6,5 +6,6 @@
         <file>Common/Indicator.qml</file>
         <file>Common/CustomDialog.qml</file>
         <file>Serial/SerialMainWindow.qml</file>
+        <file>Serial/SerialView.qml</file>
     </qresource>
 </RCC>
