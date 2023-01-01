@@ -4,10 +4,16 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 
 Item {
-
-    property string sendMessageEditHint: "Send message here"
     width: 1280
     height: 840
+
+    property string sendMessageEditHint: "Send message here"
+    property string receiveData: serialMain.readData
+
+
+    onReceiveDataChanged: {
+        receiveListModel.append(({message: receiveData}))
+    }
 
     // Send message Area
     ColumnLayout {
@@ -56,6 +62,12 @@ Item {
             text: qsTr("Send Message")
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 30
+            enabled: sendTextEdit.text
+
+            onClicked: {
+                sendListModel.append({message: sendTextEdit.text})
+                sendTextEdit.text = ""
+            }
         }
     }
 
@@ -84,46 +96,40 @@ Item {
             ListView {
                 id: sendListView
                 anchors.fill: parent
+                focus: true
                 model: sendListModel//선언된 데이터들을 리스트뷰에 넣는다.
                 delegate: sendDelegate//delegate란 리스트 한개의 틀(틀을 하나 만들어서 그것들을 여러개 붙여놓은것이 리스트 뷰이다.)
-                highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
-                focus: true
+                highlight: Rectangle {
+                    width: delegateItem.width
+                    height: delegateItem.height
+                    color: "lightsteelblue"
+                    radius: 5
                 }
+            }
         }
 
         Button {
             text: qsTr("Message Clear")
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 30
+            enabled: sendListModel.count
+
+            onClicked: {
+                sendMessageClear()
+            }
         }
 
-        ListModel {//리스트뷰에 담은 데이터들을 선언한다.
+        ListModel {
             id: sendListModel
-            ListElement {
-
-            }
-
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
         }
 
-        Component {//리스트 뷰의 틀을 만든다.
+        Component {
            id: sendDelegate
            Item {
-               width: 100; height: 30
+               id: delegateItem
+               width: 100; height: 20
                Column {
-                   Text { text: '<b>Name:</b> ' + name }
-                   Text { text: '<b>Number:</b> ' + number }
+                   Text { text:  message }
                }
            }
         }
@@ -151,11 +157,10 @@ Item {
 
             ListView {
                 id: receiveListView
-                //anchors.fill: parent
                 width: parent.width
                 height: 300
-                model: listModel//선언된 데이터들을 리스트뷰에 넣는다.
-                delegate: listDelegate//delegate란 리스트 한개의 틀(틀을 하나 만들어서 그것들을 여러개 붙여놓은것이 리스트 뷰이다.)
+                model: receiveListModel
+                delegate: receiveDelegate
                 highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
                 focus: true
                 ScrollBar.vertical: ScrollBar{
@@ -169,147 +174,32 @@ Item {
             text: qsTr("Message Clear")
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 30
+            enabled: receiveListModel.count
+
+            onClicked: {
+                receiveListModel.clear()
+            }
         }
 
         ListModel {//리스트뷰에 담은 데이터들을 선언한다.
-            id: listModel
-            ListElement {
-
-            }
-
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
-            ListElement {
-                name: "Bill Smith"
-                number: "555 3264"
-            }
-            ListElement {
-                name: "John Brown"
-                number: "555 8426"
-            }
-            ListElement {
-                name: "Sam Wise"
-                number: "555 0473"
-            }
+            id: receiveListModel
         }
 
-        Component {//리스트 뷰의 틀을 만든다.
-           id: listDelegate
+        Component {
+           id: receiveDelegate
            Item {
-               width: parent.width
-               height: 50
+               id: delegateItem
+               width: 100; height: 20
                Column {
-                   Text { text: '<b>Name:</b> ' + name }
-                   Text { text: '<b>Number:</b> ' + number }
+                   Text { text:  message }
                }
            }
-       }
+        }
+    }
+
+    function sendMessageClear()
+    {
+        sendListModel.clear()
     }
 }
 

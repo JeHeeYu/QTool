@@ -11,6 +11,8 @@ class SerialMain : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QVariantList serialPortInfo READ GetSerialPortInfo WRITE SetSerialPortInfo)
+    Q_PROPERTY(QString readData READ GetReadData WRITE SetReadData NOTIFY ChangedReadData)
+    Q_PROPERTY(bool connectionStatus READ GetConnectionStatus WRITE SetConnectionStatus NOTIFY ChangedConnectionStatus)
 
 
 public:
@@ -18,11 +20,13 @@ public:
     ~SerialMain();
 
     Q_INVOKABLE void jeheetest(int i);
-    Q_INVOKABLE void ConnectionSerial(QVariantList info);
+    Q_INVOKABLE void connectionSerial(QVariantList info);
 
 public slots:
 
 public:
+    QString GetReadData();
+    bool GetConnectionStatus();
 
 private:
     void ConnectInit();
@@ -37,12 +41,24 @@ private:
     void SetParityBits(QSerialPort *serial, int parity);
     void SetFlowControlBits(QSerialPort *serial, int flowControl);
 
+    void SetReadData(QString data);
+    void SetConnectionStatus(bool status);
+
+
 private slots:
     void ReadData();
+
 private:
     QVariantList serialPortInfo;
     QSerialPort *serialPort = nullptr;
+    bool connectionStatus = false;
+    QString readData = "";
 
+    int zz = 0;
+
+signals:
+    void ChangedConnectionStatus();
+    void ChangedReadData();
 };
 
 #endif // SERIALMAIN_H

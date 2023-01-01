@@ -13,6 +13,7 @@ ApplicationWindow {
     title: qsTr("Serial Main Window")
 
     property int indicatorX: 1280 - 115
+    property bool connectionStatus: serialMain.connectionStatus
 
     menuBar: MainMenuBar {
         id: mainMenu
@@ -25,6 +26,10 @@ ApplicationWindow {
         }
     }
 
+    onConnectionStatusChanged: {
+        statusIndicator.indicatorActive(connectionStatus)
+    }
+
     CustomDialog {
         id: customDialog
         dialogOpenStatus: false
@@ -34,6 +39,8 @@ ApplicationWindow {
         id: statusIndicator
         visible: true
         x: indicatorX
+
+
     }
 
     SerialView {

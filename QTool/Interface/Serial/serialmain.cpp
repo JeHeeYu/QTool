@@ -6,8 +6,6 @@ SerialMain::SerialMain(QObject *parent) : QObject {parent}
 
     serialPort = new QSerialPort(this);
 
-    qDebug() << "Jehee ZZ : " << GetSerialPortInfo();
-
     ConnectInit();
 }
 
@@ -50,13 +48,16 @@ void SerialMain::jeheetest(int i)
 void SerialMain::ReadData()
 {
     const QByteArray data = serialPort->readAll();
-    QString zz(data);
 
-    qDebug() << "Jehee Data : " << zz;
-    qDebug() << "Jehee Data123 : " << data;
+    QString temp(data);
+
+    qDebug() << "Data : " << temp;
+
+    SetReadData(temp + zz);
+    emit ChangedReadData();
 }
 
-void SerialMain::ConnectionSerial(QVariantList info)
+void SerialMain::connectionSerial(QVariantList info)
 {
     qDebug() << "ConnectionSerial : " << info;
 
@@ -69,7 +70,14 @@ void SerialMain::ConnectionSerial(QVariantList info)
 
     if(!serialPort->open(QIODevice::ReadWrite)) {
         qDebug() << "Serial Open Fail" << info[0].toString();
+        SetConnectionStatus(false);
     }
+    else {
+        qDebug() << "Serial Open Success";
+        SetConnectionStatus(true);
+    }
+
+    emit ChangedConnectionStatus();
 }
 
 void SerialMain::SetPortNumber(QSerialPort *serial, const QString port)
@@ -154,4 +162,24 @@ void SerialMain::SetFlowControlBits(QSerialPort *serial, int flowControl)
     else {
         serial->setFlowControl(QSerialPort::UnknownFlowControl);
     }
+}
+
+void SerialMain::SetReadData(QString data)
+{
+    readData = data;
+}
+
+QString SerialMain::GetReadData()
+{
+    return readData;
+}
+
+void SerialMain::SetConnectionStatus(bool status)
+{
+    connectionStatus = status;
+}
+
+bool SerialMain::GetConnectionStatus()
+{
+    return connectionStatus;
 }

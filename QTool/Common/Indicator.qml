@@ -31,5 +31,19 @@ Rectangle {
             color: "red"
         }
     }
+
+    function indicatorActive(status)
+    {
+        if(status === true) {
+            greenIndicatorActive = true
+            redIndicatorActive = false
+            yellowIndicatorActive = false
+        }
+        else {
+            greenIndicatorActive = false
+            yellowIndicatorActive = false
+            redIndicatorActive = true
+        }
+    }
 }
 

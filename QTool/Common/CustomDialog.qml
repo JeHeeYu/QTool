@@ -28,12 +28,12 @@ Item {
     property int textLeftMargin: 10
     property int colSpacing: 10
     property int rowSpacing: 30
-    property int comboBoxWidth: 200
+    property int comboBoxWidth: 300
 
     Dialog {
         id: settingDialog
         visible: dialogOpenStatus
-        width: 370
+        width: 470
         height: 370
 
         standardButtons: StandardButton.Ok | StandardButton.Cancel
@@ -47,7 +47,7 @@ Item {
                 serialPortInfo[4] = parityBitsComboBoxId.currentIndex
                 serialPortInfo[5] = flowControlBitsComboBoxId.currentIndex
 
-                serialMain.ConnectionSerial(serialPortInfo)
+                serialMain.connectionSerial(serialPortInfo)
             }
             else {
                 Qt.quit()
