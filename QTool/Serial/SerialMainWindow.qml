@@ -7,12 +7,12 @@ import "../Common"
 
 ApplicationWindow {
     visible: true
-    width: 1280
-    height: 840
+    width: 1080
+    height: 760
     color: "#EFEFEF"
     title: qsTr("Serial Main Window")
 
-    property int indicatorX: 1280 - 115
+    property int indicatorX: 1080 - 115
     property bool connectionStatus: serialMain.connectionStatus
 
     menuBar: MainMenuBar {

@@ -20,7 +20,7 @@ Item {
         id: sendMessage
         x: 20
         y: 20
-        width: 300
+        width: 360
         height: 89
         spacing: 5
 
@@ -76,13 +76,14 @@ Item {
         id: sendMessageHistory
         x: 20
         y: 135
-        width: 300
+        width: sendMessage.width
         height: 485
         spacing: 10
 
         Text {
             id: element1
             text: qsTr("Sent Message")
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: 30
         }
 
