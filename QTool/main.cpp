@@ -1,26 +1,19 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QQmlContext>
+#include "mainwindow.h"
 
-#include "Interface/Serial/serialmain.h"
+#include <QApplication>
+
+#include <Serial/serialmainwindow.h>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication a(argc, argv);
+    MainWindow w;
+    //w.show();
 
-    QGuiApplication app(argc, argv);
+    SerialMainWindow s;
 
-    QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
+    s.show();
+    s.resize(1280, 820);
 
-    SerialMain s;
-    engine.rootContext()->setContextProperty("serialMain", &s);
-
-    return app.exec();
+    return a.exec();
 }
