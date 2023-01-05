@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="portNumberComboBox">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -37,7 +37,7 @@
      <string>Port Number</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="baudRateComboBox">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -99,7 +99,7 @@
      <string>Parity Bits</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_3">
+   <widget class="QComboBox" name="dataBitsComboBox">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -109,7 +109,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_4">
+   <widget class="QComboBox" name="stopBitsComboBox">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -119,7 +119,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_5">
+   <widget class="QComboBox" name="parityBitsComboBox">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -145,7 +145,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Port</string>
+     <string>Port 1</string>
     </property>
    </widget>
    <widget class="Line" name="line_2">
@@ -213,7 +213,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="serialConnectButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -223,10 +223,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Serial Connect (F7)</string>
+     <string>Serial Connect (F7) 1</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="serialDisconnectButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -236,10 +236,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Serial Disconnect (F8)</string>
+     <string>Serial Disconnect (F8) 2</string>
     </property>
    </widget>
-   <widget class="QLabel" name="portAreaLabel_2">
+   <widget class="QLabel" name="receivedSentAreaLabel">
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -255,7 +255,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Recevied/Sent Data</string>
+     <string>Recevied/Sent Data 1</string>
     </property>
    </widget>
    <widget class="QListView" name="listView">
@@ -333,7 +333,7 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="saveDataButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -343,10 +343,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Save Data (F9)</string>
+     <string>Save Data (F9) 1 </string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="searchDataButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -356,10 +356,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Search Data (Ctrl + F)</string>
+     <string>Search Data (Ctrl + F) 1</string>
     </property>
    </widget>
-   <widget class="QLabel" name="portAreaLabel_3">
+   <widget class="QLabel" name="sendDataAreaLabel">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -375,10 +375,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Send Data</string>
+     <string>Send Data 1</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="firstSendDataTextEdit">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -392,10 +392,10 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;dasdsad&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="firstSendDataCheckBoxASCII">
     <property name="geometry">
      <rect>
       <x>850</x>
@@ -408,7 +408,7 @@ p, li { white-space: pre-wrap; }
      <string>ASCII </string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="firstSendDataCheckBoxHEX">
     <property name="geometry">
      <rect>
       <x>920</x>
@@ -421,7 +421,7 @@ p, li { white-space: pre-wrap; }
      <string>HEX</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_2">
+   <widget class="QTextEdit" name="secondSendDataTextEdit">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -435,10 +435,11 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Gulim'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;dasdsad&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_3">
+   <widget class="QTextEdit" name="thirdSendDataTextEdit">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -455,7 +456,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;dasdsad&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="portAreaLabel_4">
+   <widget class="QLabel" name="connectionSetLabel">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -471,10 +472,10 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>Connection Set</string>
+     <string>Connection Set 1</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_3">
+   <widget class="QCheckBox" name="dtrCheckBox">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -487,7 +488,7 @@ p, li { white-space: pre-wrap; }
      <string>DTR</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_4">
+   <widget class="QCheckBox" name="rtsCheckBox">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -500,7 +501,7 @@ p, li { white-space: pre-wrap; }
      <string>RTS</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_5">
+   <widget class="QCheckBox" name="dsrCheckBox">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -513,7 +514,7 @@ p, li { white-space: pre-wrap; }
      <string>DSR</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_6">
+   <widget class="QCheckBox" name="ctsCheckBox">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -591,7 +592,7 @@ p, li { white-space: pre-wrap; }
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="firstSendDataSendButton">
     <property name="geometry">
      <rect>
       <x>975</x>
@@ -604,7 +605,7 @@ p, li { white-space: pre-wrap; }
      <string>Send</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="firstSendDataClearButton">
     <property name="geometry">
      <rect>
       <x>1060</x>
@@ -630,7 +631,7 @@ p, li { white-space: pre-wrap; }
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_7">
+   <widget class="QCheckBox" name="secondSendDataCheckBoxASCII">
     <property name="geometry">
      <rect>
       <x>850</x>
@@ -643,7 +644,7 @@ p, li { white-space: pre-wrap; }
      <string>ASCII </string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_8">
+   <widget class="QCheckBox" name="secondSendDataCheckBoxHEX">
     <property name="geometry">
      <rect>
       <x>920</x>
@@ -656,7 +657,7 @@ p, li { white-space: pre-wrap; }
      <string>HEX</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_9">
+   <widget class="QCheckBox" name="thirdSendDataCheckBoxASCII">
     <property name="geometry">
      <rect>
       <x>850</x>
@@ -669,7 +670,7 @@ p, li { white-space: pre-wrap; }
      <string>ASCII </string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_10">
+   <widget class="QCheckBox" name="thirdSendDataCheckBoxHEX">
     <property name="geometry">
      <rect>
       <x>920</x>
@@ -682,7 +683,7 @@ p, li { white-space: pre-wrap; }
      <string>HEX</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="secondSendDataClearButton">
     <property name="geometry">
      <rect>
       <x>1060</x>
@@ -695,7 +696,7 @@ p, li { white-space: pre-wrap; }
      <string>Clear</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="secondSendDataSendButton">
     <property name="geometry">
      <rect>
       <x>975</x>
@@ -708,7 +709,7 @@ p, li { white-space: pre-wrap; }
      <string>Send</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="thirdSendDataSendButton">
     <property name="geometry">
      <rect>
       <x>975</x>
@@ -721,7 +722,7 @@ p, li { white-space: pre-wrap; }
      <string>Send</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="thirdSendDataClearButton">
     <property name="geometry">
      <rect>
       <x>1060</x>
@@ -760,7 +761,7 @@ p, li { white-space: pre-wrap; }
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="noneRadioButton">
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -773,7 +774,7 @@ p, li { white-space: pre-wrap; }
      <string>None</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="crRadioButton">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -786,7 +787,7 @@ p, li { white-space: pre-wrap; }
      <string>CR</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="lfRadioButton">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -799,7 +800,7 @@ p, li { white-space: pre-wrap; }
      <string>LF</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_4">
+   <widget class="QRadioButton" name="crLFRadioButton">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -812,7 +813,7 @@ p, li { white-space: pre-wrap; }
      <string>CR + LF</string>
     </property>
    </widget>
-   <widget class="QLabel" name="portAreaLabel_5">
+   <widget class="QLabel" name="packetAreaLabel">
     <property name="geometry">
      <rect>
       <x>268</x>
@@ -828,7 +829,7 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>Packet</string>
+     <string>Packet 1</string>
     </property>
    </widget>
    <widget class="Line" name="line_19">
@@ -886,7 +887,7 @@ p, li { white-space: pre-wrap; }
      </font>
     </property>
     <property name="text">
-     <string>Status</string>
+     <string>Status 1</string>
     </property>
    </widget>
   </widget>
@@ -896,7 +897,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1160</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
