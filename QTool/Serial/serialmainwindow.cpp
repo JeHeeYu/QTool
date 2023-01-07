@@ -5,25 +5,44 @@ SerialMainWindow::SerialMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SerialMainWindow)
 {
+    showDataListModel = new QStringListModel(this);
+
     ui->setupUi(this);
 
     Init();
-
-    ui->textEdit->setPlaceholderText("Jehee");
 }
 
 SerialMainWindow::~SerialMainWindow()
 {
     delete ui;
+    delete showDataListModel;
 }
 
 void SerialMainWindow::Init()
 {
+    ConnectInit();
     LabelInit();
     ComboBoxInit();
     CheckBoxInit();
     ButtonInit();
     RadioButtonInit();
+    TextEditInit();
+}
+
+void SerialMainWindow::ConnectInit()
+{
+    // ui -> SerialMainWindow Connect Event
+    connect(ui->serialConnectButton, SIGNAL(clicked()), this, SLOT(ConnectButtonClickEvent()));
+    connect(ui->serialDisconnectButton, SIGNAL(clicked()), this, SLOT(DisconnectButtonClickEvent()));
+    connect(ui->dataListViewClearButton, SIGNAL(clicked()), this, SLOT(DataListViewClearButtonClickEvent()));
+
+    // SerialMainWindow -> SerialInterface Connect Event
+    connect(this, SIGNAL(ConnectButtonClickSignal(QVariantList)), SERIALINTERFACE(), SLOT(ConnectSerialSlot(QVariantList)));
+    connect(this, SIGNAL(DisconnectButtonClickSignal()), SERIALINTERFACE(), SLOT(CloseSerialSlot()));
+
+    // SerialInterface -> SerialMainWindow Connect Event
+    connect(SERIALINTERFACE(), SIGNAL(ShowReadDataSignal(QString)), this, SLOT(ShowReadDataSlot(QString)));
+    connect(SERIALINTERFACE(), SIGNAL(ConnectionResultSignal(bool)), this, SLOT(ConnectionResultSlot(bool)));
 }
 
 void SerialMainWindow::LabelInit()
@@ -45,34 +64,42 @@ void SerialMainWindow::LabelInit()
 
 void SerialMainWindow::ComboBoxInit()
 {
+    QVariantList portInfo = SERIALINTERFACE()->GetSerialPortInfo();
+
+    for(int i = 0; i < portInfo.size(); i++) {
+        ui->portNumberComboBox->addItem(portInfo[i].toString());
+    }
+
     // Baud Rate Combo Box Data
-    ui->baudRateComboBox->addItem(BAUD_RATE_9600);
-    ui->baudRateComboBox->addItem(BAUD_RATE_1200);
-    ui->baudRateComboBox->addItem(BAUD_RATE_2400);
-    ui->baudRateComboBox->addItem(BAUD_RATE_4800);
-    ui->baudRateComboBox->addItem(BAUD_RATE_19200);
-    ui->baudRateComboBox->addItem(BAUD_RATE_38400);
-    ui->baudRateComboBox->addItem(BAUD_RATE_57600);
-    ui->baudRateComboBox->addItem(BAUD_RATE_115200);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_9600);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_1200);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_2400);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_4800);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_19200);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_38400);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_57600);
+    ui->baudRateComboBox->addItem(BAUD_RATE_COMBO_BOX_115200);
 
     // Data Bits Combo Box Data
-    ui->dataBitsComboBox->addItem(DATA_BITS_5);
-    ui->dataBitsComboBox->addItem(DATA_BITS_6);
-    ui->dataBitsComboBox->addItem(DATA_BITS_7);
-    ui->dataBitsComboBox->addItem(DATA_BITS_8);
-    ui->dataBitsComboBox->addItem(DATA_BITS_NONE);
+    ui->dataBitsComboBox->addItem(DATA_BITS_COMBO_BOX_8);
+    ui->dataBitsComboBox->addItem(DATA_BITS_COMBO_BOX_5);
+    ui->dataBitsComboBox->addItem(DATA_BITS_COMBO_BOX_6);
+    ui->dataBitsComboBox->addItem(DATA_BITS_COMBO_BOX_7);
+    ui->dataBitsComboBox->addItem(DATA_BITS_COMBO_BOX_NONE);
 
     // Stop Bits Combo Box Data
-    ui->stopBitsComboBox->addItem(STOP_BITS_1);
-    ui->stopBitsComboBox->addItem(STOP_BITS_2);
-    ui->stopBitsComboBox->addItem(STOP_BITS_3);
-    ui->stopBitsComboBox->addItem(STOP_BITS_NONE);
+    ui->stopBitsComboBox->addItem(STOP_BITS_COMBO_BOX_1);
+    ui->stopBitsComboBox->addItem(STOP_BITS_COMBO_BOX_2);
+    ui->stopBitsComboBox->addItem(STOP_BITS_COMBO_BOX_3);
+    ui->stopBitsComboBox->addItem(STOP_BITS_COMBO_BOX_NONE);
 
     // Parity Bits Combo Box Data
-    ui->parityBitsComboBox->addItem(PARITY_BITS_1);
-    ui->parityBitsComboBox->addItem(PARITY_BITS_2);
-    ui->parityBitsComboBox->addItem(PARITY_BITS_3);
-    ui->parityBitsComboBox->addItem(PARITY_BITS_NONE);
+    ui->parityBitsComboBox->addItem(PARITY_BITS_COMBO_BOX_NO);
+    ui->parityBitsComboBox->addItem(PARITY_BITS_COMBO_BOX_ODD);
+    ui->parityBitsComboBox->addItem(PARITY_BITS_COMBO_BOX_EVEN);
+    ui->parityBitsComboBox->addItem(PARITY_BITS_COMBO_BOX_SPACE);
+    ui->parityBitsComboBox->addItem(PARITY_BITS_COMBO_BOX_MARK);
+    ui->parityBitsComboBox->addItem(PARITY_BITS_COMBO_BOX_NONE);
 }
 
 void SerialMainWindow::CheckBoxInit()
@@ -107,6 +134,11 @@ void SerialMainWindow::ButtonInit()
     ui->secondSendDataClearButton->setText(SEND_DATA_CLEAR_BUTTON_TEXT);
     ui->thirdSendDataSendButton->setText(SEND_DATA_SEND_BUTTON_TEXT);
     ui->thirdSendDataClearButton->setText(SEND_DATA_CLEAR_BUTTON_TEXT);
+
+    // List View Data Clear Button Text
+    ui->dataListViewClearButton->setText(SEND_DATA_CLEAR_BUTTON_TEXT);
+
+    ui->serialDisconnectButton->setEnabled(false);
 }
 
 void SerialMainWindow::RadioButtonInit()
@@ -120,5 +152,73 @@ void SerialMainWindow::RadioButtonInit()
 
 void SerialMainWindow::TextEditInit()
 {
+    // Place holder Text
+    ui->firstSendDataTextEdit->setPlaceholderText(SEND_DATA_PLACE_HOLDER);
+    ui->secondSendDataTextEdit->setPlaceholderText(SEND_DATA_PLACE_HOLDER);
+    ui->thirdSendDataTextEdit->setPlaceholderText(SEND_DATA_PLACE_HOLDER);
+}
 
+void SerialMainWindow::ConnectButtonClickEvent()
+{
+    QVariantList portInfo;
+
+    portInfo << ui->portNumberComboBox->currentText();
+    portInfo << ui->baudRateComboBox->currentIndex();
+    portInfo << ui->dataBitsComboBox->currentIndex();
+    portInfo << ui->stopBitsComboBox->currentIndex();
+    portInfo << ui->parityBitsComboBox->currentIndex();
+
+    emit ConnectButtonClickSignal(portInfo);
+
+    showDataList.clear();
+}
+
+void SerialMainWindow::DisconnectButtonClickEvent()
+{
+    emit DisconnectButtonClickSignal();
+
+    showDataList << DISCONNECT_MESSAGE;
+    showDataListModel->setStringList(showDataList);
+
+    ui->dataListView->setModel(showDataListModel);
+    showDataList.clear();
+}
+
+void SerialMainWindow::ShowReadDataSlot(QString data)
+{
+    showDataList << data;
+    showDataListModel->setStringList(showDataList);
+
+    ui->dataListView->setModel(showDataListModel);
+}
+
+void SerialMainWindow::DataListViewClearButtonClickEvent()
+{
+    showDataList.clear();
+    showDataListModel->setStringList({});
+    ui->dataListView->setModel(showDataListModel);
+}
+
+void SerialMainWindow::ConnectionResultSlot(bool result)
+{
+    // Connection Success
+    if(result == true) {
+        showDataList << CONNECT_SUCCESS_MESSAGE;
+        showDataListModel->setStringList(showDataList);
+
+        ui->dataListView->setModel(showDataListModel);
+
+        ui->serialConnectButton->setEnabled(false);
+        ui->serialDisconnectButton->setEnabled(true);
+    }
+    // Connection Fail
+    else {
+        showDataList << CONNECT_FAIL_MESSAGE;
+        showDataListModel->setStringList(showDataList);
+
+        ui->dataListView->setModel(showDataListModel);
+
+        ui->serialConnectButton->setEnabled(true);
+        ui->serialDisconnectButton->setEnabled(false);
+    }
 }

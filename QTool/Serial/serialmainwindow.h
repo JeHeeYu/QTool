@@ -2,8 +2,12 @@
 #define SERIALMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QStringListModel>
+
+#include "serialinterface.h"
 
 // Label Text
 #define PORT_AREA_LABEL                 "Port"
@@ -18,33 +22,35 @@
 #define PACKET_AREA_LABEL               "Packet"
 
 // Baud Rate Check Box Data
-#define BAUD_RATE_9600          "9600"
-#define BAUD_RATE_1200          "1200"
-#define BAUD_RATE_2400          "2400"
-#define BAUD_RATE_4800          "4800"
-#define BAUD_RATE_19200         "19200"
-#define BAUD_RATE_38400         "38400"
-#define BAUD_RATE_57600         "57600"
-#define BAUD_RATE_115200        "115200"
+#define BAUD_RATE_COMBO_BOX_9600          "9600"
+#define BAUD_RATE_COMBO_BOX_1200          "1200"
+#define BAUD_RATE_COMBO_BOX_2400          "2400"
+#define BAUD_RATE_COMBO_BOX_4800          "4800"
+#define BAUD_RATE_COMBO_BOX_19200         "19200"
+#define BAUD_RATE_COMBO_BOX_38400         "38400"
+#define BAUD_RATE_COMBO_BOX_57600         "57600"
+#define BAUD_RATE_COMBO_BOX_115200        "115200"
 
 // Data Bits Check Box Data
-#define DATA_BITS_5         "5"
-#define DATA_BITS_6         "6"
-#define DATA_BITS_7         "7"
-#define DATA_BITS_8         "8"
-#define DATA_BITS_NONE      "-1"
+#define DATA_BITS_COMBO_BOX_5         "5"
+#define DATA_BITS_COMBO_BOX_6         "6"
+#define DATA_BITS_COMBO_BOX_7         "7"
+#define DATA_BITS_COMBO_BOX_8         "8"
+#define DATA_BITS_COMBO_BOX_NONE      "-1"
 
 // Stop Bits Check Box Data
-#define STOP_BITS_1         "1"
-#define STOP_BITS_2         "2"
-#define STOP_BITS_3         "3"
-#define STOP_BITS_NONE      "-1"
+#define STOP_BITS_COMBO_BOX_1         "1"
+#define STOP_BITS_COMBO_BOX_2         "2"
+#define STOP_BITS_COMBO_BOX_3         "3"
+#define STOP_BITS_COMBO_BOX_NONE      "-1"
 
 // Parity Bits Check Box Data
-#define PARITY_BITS_1       "1"
-#define PARITY_BITS_2       "2"
-#define PARITY_BITS_3       "3"
-#define PARITY_BITS_NONE    "-1"
+#define PARITY_BITS_COMBO_BOX_NO       "No Parity"
+#define PARITY_BITS_COMBO_BOX_ODD      "Odd Parity"
+#define PARITY_BITS_COMBO_BOX_EVEN     "Even Parity"
+#define PARITY_BITS_COMBO_BOX_SPACE    "Space Parity"
+#define PARITY_BITS_COMBO_BOX_MARK     "Mark Parity"
+#define PARITY_BITS_COMBO_BOX_NONE     "Unknown"
 
 // CheckBox Text
 #define DTR_CHECK_BOX_TEXT              "DTR"
@@ -70,6 +76,10 @@
 // Place Holder Text
 #define SEND_DATA_PLACE_HOLDER      "Enter data to send"
 
+#define CONNECT_SUCCESS_MESSAGE     "Serial Connect Success!\n\n"
+#define CONNECT_FAIL_MESSAGE        "Serial Connect Fail!\n\n"
+#define DISCONNECT_MESSAGE          "Serial Close..."
+
 namespace Ui {
 class SerialMainWindow;
 }
@@ -88,6 +98,7 @@ public:
 
 private:
     void Init();
+    void ConnectInit();
     void LabelInit();
     void ComboBoxInit();
     void CheckBoxInit();
@@ -95,10 +106,24 @@ private:
     void RadioButtonInit();
     void TextEditInit();
 
+private slots:
+    // UI Event
+    void ConnectButtonClickEvent();
+    void DisconnectButtonClickEvent();
+    void DataListViewClearButtonClickEvent();
+
+    // Data Event
+    void ShowReadDataSlot(QString data);
+    void ConnectionResultSlot(bool result);
+
 private:
     Ui::SerialMainWindow *ui;
+    QStringListModel *showDataListModel;
+    QStringList showDataList;
 
 signals:
+    void ConnectButtonClickSignal(QVariantList);
+    void DisconnectButtonClickSignal();
 };
 
 #endif // SERIALMAINWINDOW_H
