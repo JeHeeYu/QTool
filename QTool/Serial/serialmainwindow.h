@@ -115,6 +115,9 @@ private slots:
     void FirstSendDataButtonClickEvent();
     void SecondSendDataButtonClickEvent();
     void ThirdSendDataButtonClickEvent();
+    void FirstSendDataClearButtonClickEvent();
+    void SecondSendDataClearButtonClickEvent();
+    void ThirdSendDataClearButtonClickEvent();
 
     // Data Event
     void ShowReadDataSlot(QString data);

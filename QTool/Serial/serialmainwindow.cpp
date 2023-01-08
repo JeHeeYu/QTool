@@ -289,8 +289,6 @@ void SerialMainWindow::SecondSendDataButtonClickEvent()
     emit SendDataButtonClickSignal(sendData);
 }
 
-
-
 void SerialMainWindow::ThirdSendDataButtonClickEvent()
 {
     QString str = ui->thirdSendDataTextEdit->toPlainText();
