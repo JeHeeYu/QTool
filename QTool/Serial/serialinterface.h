@@ -64,6 +64,7 @@ public:
     explicit SerialInterface();
     ~SerialInterface();
     QVariantList GetSerialPortInfo();
+    bool GetConnectionStatus();
 
 public slots:
 public:
@@ -82,6 +83,7 @@ private slots:
     void ConnectSerialSlot(QVariantList data);
     void CloseSerialSlot();
     void ReadDataSlot();
+    void SendDataSlot(QByteArray data);
 
 private:
     QVariantList portInfo;

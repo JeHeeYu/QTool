@@ -35,10 +35,14 @@ void SerialMainWindow::ConnectInit()
     connect(ui->serialConnectButton, SIGNAL(clicked()), this, SLOT(ConnectButtonClickEvent()));
     connect(ui->serialDisconnectButton, SIGNAL(clicked()), this, SLOT(DisconnectButtonClickEvent()));
     connect(ui->dataListViewClearButton, SIGNAL(clicked()), this, SLOT(DataListViewClearButtonClickEvent()));
+    connect(ui->firstSendDataSendButton, SIGNAL(clicked()), this, SLOT(FirstSendDataButtonClickEvent()));
+    connect(ui->secondSendDataSendButton, SIGNAL(clicked()), this, SLOT(SecondSendDataButtonClickEvent()));
+    connect(ui->thirdSendDataSendButton, SIGNAL(clicked()), this, SLOT(ThirdSendDataButtonClickEvent()));
 
     // SerialMainWindow -> SerialInterface Connect Event
     connect(this, SIGNAL(ConnectButtonClickSignal(QVariantList)), SERIALINTERFACE(), SLOT(ConnectSerialSlot(QVariantList)));
     connect(this, SIGNAL(DisconnectButtonClickSignal()), SERIALINTERFACE(), SLOT(CloseSerialSlot()));
+    connect(this, SIGNAL(SendDataButtonClickSignal(QByteArray)), SERIALINTERFACE(), SLOT(SendDataSlot(QByteArray)));
 
     // SerialInterface -> SerialMainWindow Connect Event
     connect(SERIALINTERFACE(), SIGNAL(ShowReadDataSignal(QString)), this, SLOT(ShowReadDataSlot(QString)));
@@ -221,4 +225,70 @@ void SerialMainWindow::ConnectionResultSlot(bool result)
         ui->serialConnectButton->setEnabled(true);
         ui->serialDisconnectButton->setEnabled(false);
     }
+}
+
+void SerialMainWindow::FirstSendDataButtonClickEvent()
+{
+    QString str = ui->firstSendDataTextEdit->toPlainText();
+
+    bool hexCheckBoxStatus = ui->firstSendDataCheckBoxHEX->isChecked();
+    bool asciiCheckBoxStatus = ui->firstSendDataCheckBoxASCII->isChecked();
+
+    QByteArray sendData;
+
+    if((hexCheckBoxStatus == true) && (asciiCheckBoxStatus == false)) {
+        sendData = QByteArray::fromHex(str.toLatin1());
+    }
+    else if((hexCheckBoxStatus == false) && (asciiCheckBoxStatus == true)) {
+        sendData = str.toUtf8();
+    }
+    else {
+        sendData = str.toLatin1();
+    }
+
+    emit SendDataButtonClickSignal(sendData);
+}
+
+void SerialMainWindow::SecondSendDataButtonClickEvent()
+{
+    QString str = ui->secondSendDataTextEdit->toPlainText();
+
+    bool hexCheckBoxStatus = ui->secondSendDataCheckBoxHEX->isChecked();
+    bool asciiCheckBoxStatus = ui->secondSendDataCheckBoxASCII->isChecked();
+
+    QByteArray sendData;
+
+    if((hexCheckBoxStatus == true) && (asciiCheckBoxStatus == false)) {
+        sendData = QByteArray::fromHex(str.toLatin1());
+    }
+    else if((hexCheckBoxStatus == false) && (asciiCheckBoxStatus == true)) {
+        sendData = str.toUtf8();
+    }
+    else {
+        sendData = str.toLatin1();
+    }
+
+    emit SendDataButtonClickSignal(sendData);
+}
+
+void SerialMainWindow::ThirdSendDataButtonClickEvent()
+{
+    QString str = ui->thirdSendDataTextEdit->toPlainText();
+
+    bool hexCheckBoxStatus = ui->thirdSendDataCheckBoxHEX->isChecked();
+    bool asciiCheckBoxStatus = ui->thirdSendDataCheckBoxASCII->isChecked();
+
+    QByteArray sendData;
+
+    if((hexCheckBoxStatus == true) && (asciiCheckBoxStatus == false)) {
+        sendData = QByteArray::fromHex(str.toLatin1());
+    }
+    else if((hexCheckBoxStatus == false) && (asciiCheckBoxStatus == true)) {
+        sendData = str.toUtf8();
+    }
+    else {
+        sendData = str.toLatin1();
+    }
+
+    emit SendDataButtonClickSignal(sendData);
 }

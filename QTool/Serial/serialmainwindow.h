@@ -6,6 +6,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QStringListModel>
+#include <QFileDialog>
 
 #include "serialinterface.h"
 
@@ -111,6 +112,9 @@ private slots:
     void ConnectButtonClickEvent();
     void DisconnectButtonClickEvent();
     void DataListViewClearButtonClickEvent();
+    void FirstSendDataButtonClickEvent();
+    void SecondSendDataButtonClickEvent();
+    void ThirdSendDataButtonClickEvent();
 
     // Data Event
     void ShowReadDataSlot(QString data);
@@ -124,6 +128,7 @@ private:
 signals:
     void ConnectButtonClickSignal(QVariantList);
     void DisconnectButtonClickSignal();
+    void SendDataButtonClickSignal(QByteArray);
 };
 
 #endif // SERIALMAINWINDOW_H

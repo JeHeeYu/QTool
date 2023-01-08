@@ -53,9 +53,12 @@ void SerialInterface::ConnectSerialSlot(QVariantList data)
 
 void SerialInterface::CloseSerialSlot()
 {
-    serialPort->close();
+    if(GetConnectionStatus() == true) {
+        serialPort->close();
 
-    connectionStatus = false;
+        connectionStatus = false;
+    }
+
     emit ConnectionResultSignal(connectionStatus);
 }
 
@@ -183,4 +186,16 @@ void SerialInterface::ReadDataSlot()
     QString temp(data);
 
     emit ShowReadDataSignal(temp);
+}
+
+void SerialInterface::SendDataSlot(QByteArray data)
+{
+    if(GetConnectionStatus() == true) {
+        serialPort->write(data);
+    }
+}
+
+bool SerialInterface::GetConnectionStatus()
+{
+    return connectionStatus;
 }
