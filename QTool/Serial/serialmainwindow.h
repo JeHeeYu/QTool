@@ -6,7 +6,10 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QStringListModel>
+#include <QPixmap>
 #include <QFileDialog>
+#include <QLabel>
+#include <QTimer>
 
 #include "serialinterface.h"
 
@@ -77,6 +80,14 @@
 // Place Holder Text
 #define SEND_DATA_PLACE_HOLDER      "Enter data to send"
 
+// Indiactor Text
+#define CONNECTION_STATUS_TEXT      "Con"
+#define TX_STATUS_TEXT              "Tx"
+#define RX_STATUS_TEXT              "Rx"
+
+#define INDICATOR_SIZE_X    60
+#define INDICATOR_SIZE_Y    15
+
 #define CONNECT_SUCCESS_MESSAGE     "Serial Connect Success!\n\n"
 #define CONNECT_FAIL_MESSAGE        "Serial Connect Fail!\n\n"
 #define DISCONNECT_MESSAGE          "Serial Close..."
@@ -106,6 +117,8 @@ private:
     void ButtonInit();
     void RadioButtonInit();
     void TextEditInit();
+    void IndicatorInit();
+    void IndicatorOn(QLabel *indicator);
 
 private slots:
     // UI Event
@@ -118,6 +131,7 @@ private slots:
     void FirstSendDataClearButtonClickEvent();
     void SecondSendDataClearButtonClickEvent();
     void ThirdSendDataClearButtonClickEvent();
+    void IndicatorOff();
 
     // Data Event
     void ShowReadDataSlot(QString data);
@@ -127,6 +141,11 @@ private:
     Ui::SerialMainWindow *ui;
     QStringListModel *showDataListModel;
     QStringList showDataList;
+
+    QPixmap greenPix;
+    QPixmap grayPix;
+
+    QTimer *indicatorTimer = new QTimer(this);
 
 signals:
     void ConnectButtonClickSignal(QVariantList);

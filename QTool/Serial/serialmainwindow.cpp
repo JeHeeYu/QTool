@@ -10,14 +10,13 @@ SerialMainWindow::SerialMainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     Init();
-
-
 }
 
 SerialMainWindow::~SerialMainWindow()
 {
     delete ui;
     delete showDataListModel;
+    delete indicatorTimer;
 }
 
 void SerialMainWindow::Init()
@@ -29,6 +28,7 @@ void SerialMainWindow::Init()
     ButtonInit();
     RadioButtonInit();
     TextEditInit();
+    IndicatorInit();
 }
 
 void SerialMainWindow::ConnectInit()
@@ -52,6 +52,8 @@ void SerialMainWindow::ConnectInit()
     // SerialInterface -> SerialMainWindow Connect Event
     connect(SERIALINTERFACE(), SIGNAL(ShowReadDataSignal(QString)), this, SLOT(ShowReadDataSlot(QString)));
     connect(SERIALINTERFACE(), SIGNAL(ConnectionResultSignal(bool)), this, SLOT(ConnectionResultSlot(bool)));
+
+    connect(indicatorTimer, SIGNAL(timeout()), this, SLOT(IndicatorOff()));
 }
 
 void SerialMainWindow::LabelInit()
@@ -69,6 +71,11 @@ void SerialMainWindow::LabelInit()
     ui->receivedSentAreaLabel->setText(RECEIVED_SENT_AREA_LABEL);
     ui->packetAreaLabel->setText(PACKET_AREA_LABEL);
     ui->connectionSetLabel->setText(CONNECTION_SET_AREA_LABEL);
+
+    // Indicator Text
+    ui->connectionSetLabel->setText(CONNECTION_STATUS_TEXT);
+    ui->txStatusLabel->setText(TX_STATUS_TEXT);
+    ui->rxStatusLabel->setText(RX_STATUS_TEXT);
 }
 
 void SerialMainWindow::ComboBoxInit()
@@ -180,6 +187,35 @@ void SerialMainWindow::TextEditInit()
     ui->thirdSendDataTextEdit->setPlaceholderText(SEND_DATA_PLACE_HOLDER);
 }
 
+void SerialMainWindow::IndicatorInit()
+{
+    greenPix = QPixmap("../images/green.png");
+    grayPix = QPixmap("../images/gray.png");
+
+    ui->connectionStatus->resize(INDICATOR_SIZE_X, INDICATOR_SIZE_Y);
+    ui->connectionStatus->setPixmap(grayPix);
+
+    ui->txStatus->resize(INDICATOR_SIZE_X, INDICATOR_SIZE_Y);
+    ui->txStatus->setPixmap(grayPix);
+
+    ui->rxStatus->resize(INDICATOR_SIZE_X, INDICATOR_SIZE_Y);
+    ui->rxStatus->setPixmap(grayPix);
+}
+
+void SerialMainWindow::IndicatorOn(QLabel *indicator)
+{
+    if(SERIALINTERFACE()->GetConnectionStatus() == true) {
+        indicator->setPixmap(greenPix);
+        indicatorTimer->start(100);
+    }
+}
+
+void SerialMainWindow::IndicatorOff()
+{
+    ui->txStatus->setPixmap(grayPix);
+    ui->rxStatus->setPixmap(grayPix);
+}
+
 void SerialMainWindow::ConnectButtonClickEvent()
 {
     QVariantList portInfo;
@@ -208,6 +244,7 @@ void SerialMainWindow::DisconnectButtonClickEvent()
 
 void SerialMainWindow::ShowReadDataSlot(QString data)
 {
+    IndicatorOn(ui->rxStatus);
     showDataList << data;
     showDataListModel->setStringList(showDataList);
 
@@ -225,6 +262,7 @@ void SerialMainWindow::ConnectionResultSlot(bool result)
 {
     // Connection Success
     if(result == true) {
+        ui->connectionStatus->setPixmap(greenPix);
         showDataList << CONNECT_SUCCESS_MESSAGE;
         showDataListModel->setStringList(showDataList);
 
@@ -235,6 +273,7 @@ void SerialMainWindow::ConnectionResultSlot(bool result)
     }
     // Connection Fail
     else {
+        ui->connectionStatus->setPixmap(grayPix);
         showDataList << CONNECT_FAIL_MESSAGE;
         showDataListModel->setStringList(showDataList);
 
@@ -247,6 +286,7 @@ void SerialMainWindow::ConnectionResultSlot(bool result)
 
 void SerialMainWindow::FirstSendDataButtonClickEvent()
 {
+    IndicatorOn(ui->txStatus);
     QString str = ui->firstSendDataTextEdit->toPlainText();
 
     bool hexCheckBoxStatus = ui->firstSendDataCheckBoxHEX->isChecked();
@@ -265,10 +305,12 @@ void SerialMainWindow::FirstSendDataButtonClickEvent()
     }
 
     emit SendDataButtonClickSignal(sendData);
+    //IndicatorOff(ui->txStatus);
 }
 
 void SerialMainWindow::SecondSendDataButtonClickEvent()
 {
+    IndicatorOn(ui->txStatus);
     QString str = ui->secondSendDataTextEdit->toPlainText();
 
     bool hexCheckBoxStatus = ui->secondSendDataCheckBoxHEX->isChecked();
@@ -291,6 +333,7 @@ void SerialMainWindow::SecondSendDataButtonClickEvent()
 
 void SerialMainWindow::ThirdSendDataButtonClickEvent()
 {
+    IndicatorOn(ui->txStatus);
     QString str = ui->thirdSendDataTextEdit->toPlainText();
 
     bool hexCheckBoxStatus = ui->thirdSendDataCheckBoxHEX->isChecked();
