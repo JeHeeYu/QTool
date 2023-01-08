@@ -10,6 +10,8 @@ SerialMainWindow::SerialMainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     Init();
+
+
 }
 
 SerialMainWindow::~SerialMainWindow()
@@ -38,6 +40,9 @@ void SerialMainWindow::ConnectInit()
     connect(ui->firstSendDataSendButton, SIGNAL(clicked()), this, SLOT(FirstSendDataButtonClickEvent()));
     connect(ui->secondSendDataSendButton, SIGNAL(clicked()), this, SLOT(SecondSendDataButtonClickEvent()));
     connect(ui->thirdSendDataSendButton, SIGNAL(clicked()), this, SLOT(ThirdSendDataButtonClickEvent()));
+    connect(ui->firstSendDataClearButton, SIGNAL(clicked()), this, SLOT(FirstSendDataClearButtonClickEvent()));
+    connect(ui->secondSendDataClearButton, SIGNAL(clicked()), this, SLOT(SecondSendDataClearButtonClickEvent()));
+    connect(ui->thirdSendDataClearButton, SIGNAL(clicked()), this, SLOT(ThirdSendDataClearButtonClickEvent()));
 
     // SerialMainWindow -> SerialInterface Connect Event
     connect(this, SIGNAL(ConnectButtonClickSignal(QVariantList)), SERIALINTERFACE(), SLOT(ConnectSerialSlot(QVariantList)));
@@ -152,8 +157,21 @@ void SerialMainWindow::RadioButtonInit()
     ui->crRadioButton->setText(CR_RADIO_BUTTON_TEXT);
     ui->lfRadioButton->setText(LF_RADIO_BUTTON_TEXT);
     ui->crLFRadioButton->setText(CR_LF_RADIO_BUTTON_TEXT);
+
+    ui->noneRadioButton->setChecked(true);
+    ui->crRadioButton->setChecked(false);
+    ui->lfRadioButton->setChecked(false);
+    ui->crLFRadioButton->setChecked(false);
+
 }
 
+/**
+* @brief Text Edit Widget
+* @details Returns the currently connected serial status
+* @param void
+* @return void
+* @see SerialMainWindow
+*/
 void SerialMainWindow::TextEditInit()
 {
     // Place holder Text
@@ -271,6 +289,8 @@ void SerialMainWindow::SecondSendDataButtonClickEvent()
     emit SendDataButtonClickSignal(sendData);
 }
 
+
+
 void SerialMainWindow::ThirdSendDataButtonClickEvent()
 {
     QString str = ui->thirdSendDataTextEdit->toPlainText();
@@ -291,4 +311,19 @@ void SerialMainWindow::ThirdSendDataButtonClickEvent()
     }
 
     emit SendDataButtonClickSignal(sendData);
+}
+
+void SerialMainWindow::FirstSendDataClearButtonClickEvent()
+{
+    ui->firstSendDataTextEdit->clear();
+}
+
+void SerialMainWindow::SecondSendDataClearButtonClickEvent()
+{
+    ui->secondSendDataTextEdit->clear();
+}
+
+void SerialMainWindow::ThirdSendDataClearButtonClickEvent()
+{
+    ui->thirdSendDataTextEdit->clear();
 }
